@@ -39,6 +39,8 @@
  script:
      - platformio run
 
+ env:
+     - PLATFORMIO_CI_SRC=arduboy/buttons
 
 #
 # Template #2: The project is intended to by used as a library with examples
