@@ -16,4 +16,4 @@
      - platformio lib install "Arduboy"
 
  script:
-     - platformio ci --project-conf=arduboy/buttons/platformio.ini
+     - platformio ci --board=arduboy
