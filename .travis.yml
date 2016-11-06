@@ -9,6 +9,7 @@
 
  env:
      - PLATFORMIO_CI_SRC=arduboy/buttons/src/main.ino
+     - PLATFORMIO_CI_SRC=arduboy/bin2dec/src/main.ino
 
  install:
      - pip install -U platformio
