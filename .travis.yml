@@ -8,10 +8,11 @@
          - "~/.platformio"
 
  env:
-     - PLATFORMIO_CI_SRC=./arduboy/buttons
+     - PLATFORMIO_CI_SRC=arduboy/buttons/src/main.ino
 
  install:
      - pip install -U platformio
+     - platformio lib install "Arduboy"
 
  script:
-     - platformio ci --project-conf=./arduboy/buttons/platformio.ini
+     - platformio ci --project-conf=arduboy/buttons/platformio.ini
