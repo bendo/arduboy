@@ -5,6 +5,10 @@ Arduboy arduboy;
 int16_t x, y;
 uint8_t r;
 
+void centerCircle();
+
+boolean fitIn(); 
+
 void setup() {
     arduboy.beginNoLogo();
     arduboy.setFrameRate(15);
