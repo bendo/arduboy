@@ -7,6 +7,9 @@
      directories:
          - "~/.platformio"
 
+ env:
+     - PLATFORMIO_CI_SRC=./arduboy/buttons
+
  install:
      - pip install -U platformio
 
