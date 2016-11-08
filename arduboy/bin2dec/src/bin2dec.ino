@@ -69,7 +69,7 @@ void bin2dec() {
 void dec_to_str (char* str, uint32_t val, size_t digits) {
     size_t i=1u;
 
-    for(; i <= digits; i++) {
+    for (; i <= digits; i++) {
         str[digits-i] = (char)((val % 10u) + '0');
         val /= 10u;
     }
@@ -89,7 +89,7 @@ void updateDisplay() {
 
 uint32_t my_pow(uint32_t x, uint32_t n) {
     uint32_t r = 1;
-    if(n == 0)
+    if (n == 0)
         return 1;
 
     while (n != 0) {
