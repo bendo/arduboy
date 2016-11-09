@@ -98,6 +98,8 @@ void updateDisplay() {
     arduboy.print(strIn);
     arduboy.setCursor(16 + (position * 6), 16);
     arduboy.write('^');
+    arduboy.setCursor(16, 32);
+    arduboy.print(16 - position);
     arduboy.setCursor(80, 32);
     arduboy.print(strOut);
     arduboy.display();
