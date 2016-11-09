@@ -4,7 +4,7 @@ Arduboy arduboy;
 
 uint8_t position{0};
 
-char strIn[16]{"000000000000000"};
+char strIn[17]{"0000000000000000"};
 
 char strOut[6]{"00000"};
 
@@ -12,11 +12,11 @@ void printLogo();
 
 void bin2dec();
 
-void dec_to_str (char* str, uint32_t val, size_t digits);
+void dec_to_str (char* str, uint16_t val, size_t digits);
 
 void updateDisplay();
 
-uint32_t my_pow(uint32_t x, uint32_t n);
+uint16_t my_pow(uint8_t x, uint8_t n);
 
 void setup() {
     arduboy.beginNoLogo();
@@ -33,12 +33,12 @@ void loop() {
         if (position > 0) {
             position--;
         } else {
-            position = 14;
+            position = 15;
         }
     }
 
     if (arduboy.pressed(RIGHT_BUTTON)) {
-        if (position < 14) {
+        if (position < 15) {
             position++;
         } else {
             position = 0;
@@ -51,12 +51,12 @@ void loop() {
     }
 
     if (arduboy.pressed(A_BUTTON)) {
-        strncpy(strIn, "111111111111111", 16);
+        strncpy(strIn, "1111111111111111", 17);
         bin2dec();
     }
 
     if (arduboy.pressed(B_BUTTON)) {
-        strncpy(strIn, "000000000000000", 16);
+        strncpy(strIn, "0000000000000000", 17);
         bin2dec();
     }
 
@@ -73,8 +73,8 @@ void printLogo() {
 }
 
 void bin2dec() {
-    int len = sizeof strIn / sizeof *strIn;
-    int d, j = 0;
+    size_t len = sizeof strIn / sizeof *strIn;
+    uint16_t d = 0, j = 0;
     for (int i = len-2; i >= 0; i--) {
         d += (strIn[i] - '0') * my_pow(2, j);
         j++;
@@ -82,7 +82,7 @@ void bin2dec() {
     dec_to_str(strOut, d, 5);
 }
 
-void dec_to_str (char* str, uint32_t val, size_t digits) {
+void dec_to_str (char* str, uint16_t val, size_t digits) {
     size_t i=1u;
 
     for (; i <= digits; i++) {
@@ -94,17 +94,17 @@ void dec_to_str (char* str, uint32_t val, size_t digits) {
 
 void updateDisplay() {
     arduboy.clear();
-    arduboy.setCursor(20, 8);
+    arduboy.setCursor(16, 8);
     arduboy.print(strIn);
-    arduboy.setCursor(20 + (position * 6), 16);
+    arduboy.setCursor(16 + (position * 6), 16);
     arduboy.write('^');
     arduboy.setCursor(80, 32);
     arduboy.print(strOut);
     arduboy.display();
 }
 
-uint32_t my_pow(uint32_t x, uint32_t n) {
-    uint32_t r = 1;
+uint16_t my_pow(uint8_t x, uint8_t n) {
+    uint16_t r = 1;
     if (n == 0)
         return 1;
 
