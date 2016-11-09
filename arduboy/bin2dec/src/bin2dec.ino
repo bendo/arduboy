@@ -4,7 +4,7 @@ Arduboy arduboy;
 
 uint8_t position{0};
 
-char strIn[17]{"0000000000000000"};
+char strIn[16]{"000000000000000"};
 
 char strOut[6]{"00000"};
 
@@ -29,22 +29,38 @@ void loop() {
     if (!(arduboy.nextFrame()))
         return;
 
-    if (arduboy.pressed(LEFT_BUTTON) && position > 0) {
-        position--;
-        updateDisplay();
+    if (arduboy.pressed(LEFT_BUTTON)) {
+        if (position > 0) {
+            position--;
+        } else {
+            position = 14;
+        }
     }
 
-    if (arduboy.pressed(RIGHT_BUTTON) && position < 15) {
-        position++;
-        updateDisplay();
+    if (arduboy.pressed(RIGHT_BUTTON)) {
+        if (position < 14) {
+            position++;
+        } else {
+            position = 0;
+        }
     }
 
     if (arduboy.pressed(UP_BUTTON) || arduboy.pressed(DOWN_BUTTON)) {
         strIn[position] ^= 0x01;
         bin2dec();
-        updateDisplay();
     }
 
+    if (arduboy.pressed(A_BUTTON)) {
+        strncpy(strIn, "111111111111111", 16);
+        bin2dec();
+    }
+
+    if (arduboy.pressed(B_BUTTON)) {
+        strncpy(strIn, "000000000000000", 16);
+        bin2dec();
+    }
+
+    updateDisplay();
     delay(100);
 }
 
@@ -78,9 +94,9 @@ void dec_to_str (char* str, uint32_t val, size_t digits) {
 
 void updateDisplay() {
     arduboy.clear();
-    arduboy.setCursor(16, 8);
+    arduboy.setCursor(20, 8);
     arduboy.print(strIn);
-    arduboy.setCursor(16 + (position * 6), 16);
+    arduboy.setCursor(20 + (position * 6), 16);
     arduboy.write('^');
     arduboy.setCursor(80, 32);
     arduboy.print(strOut);
