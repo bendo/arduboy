@@ -10,6 +10,9 @@ const unsigned char background[] PROGMEM = {
     0x81, 0x00, 0x12, 0x40, 0x4, 0x11, 0x00, 0x4,
 };
 
+int playerx = 5;
+int playery = 10;
+
 void setup() {
     arduboy.begin();
     arduboy.clear();
@@ -17,6 +20,23 @@ void setup() {
 
 void loop() {
     arduboy.clear();
-    arduboy.drawBitmap(5, 10, player, 16, 16, WHITE);
+
+    if (arduboy.pressed(LEFT_BUTTON)) {
+        playerx--;
+    }
+
+    if (arduboy.pressed(RIGHT_BUTTON)) {
+        playerx++;
+    }
+
+    if (arduboy.pressed(UP_BUTTON)) {
+        playery--;
+    }
+
+    if (arduboy.pressed(DOWN_BUTTON)) {
+        playery++;
+    }
+
+    arduboy.drawBitmap(playerx, playery, player, 16, 16, WHITE);
     arduboy.display();
 }
