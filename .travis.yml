@@ -11,6 +11,7 @@
      - PLATFORMIO_CI_SRC=apps/bin2dec/src/bin2dec.ino
      - PLATFORMIO_CI_SRC=apps/timer/src/timer.ino
      - PLATFORMIO_CI_SRC=demos/buttons/src/buttons.ino
+     - PLATFORMIO_CI_SRC=demos/graphics/src/graphics.ino
 
  install:
      - pip install -U platformio
