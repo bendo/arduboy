@@ -8,9 +8,9 @@
          - "~/.platformio"
 
  env:
-     - PLATFORMIO_CI_SRC=buttons/src/buttons.ino
-     - PLATFORMIO_CI_SRC=bin2dec/src/bin2dec.ino
-     - PLATFORMIO_CI_SRC=timer/src/timer.ino
+     - PLATFORMIO_CI_SRC=apps/buttons/src/buttons.ino
+     - PLATFORMIO_CI_SRC=apps/bin2dec/src/bin2dec.ino
+     - PLATFORMIO_CI_SRC=apps/timer/src/timer.ino
 
  install:
      - pip install -U platformio
