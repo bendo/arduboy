@@ -7,7 +7,7 @@ const unsigned char player[] PROGMEM  = {
 };
 
 const unsigned char background[] PROGMEM = {
-    0x81, 0x00, 0x12, 0x40, 0x4, 0x11, 0x00, 0x4,
+    0x84, 0x20, 0x9, 0x00, 0x24, 0x00, 0x10, 0x80,
 };
 
 int playerx = 5;
@@ -37,6 +37,13 @@ void loop() {
         playery++;
     }
 
+    for (int bx = 0; bx < 128; bx = bx + 8) {
+        for (int by = 0; by < 64; by = by + 8) {
+            arduboy.drawBitmap(bx, by, background, 8, 8, WHITE);
+        }
+    }
+
+    arduboy.fillRect(playerx, playery, 16, 16, BLACK);
     arduboy.drawBitmap(playerx, playery, player, 16, 16, WHITE);
     arduboy.display();
 }
