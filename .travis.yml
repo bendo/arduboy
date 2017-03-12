@@ -12,6 +12,7 @@
      - PLATFORMIO_CI_SRC=apps/timer/src/timer.ino
      - PLATFORMIO_CI_SRC=demos/buttons/src/buttons.ino
      - PLATFORMIO_CI_SRC=demos/graphics/src/graphics.ino
+     - PLATFORMIO_CI_SRC=games/pong/src/pong.ino
 
  install:
      - pip install -U platformio
