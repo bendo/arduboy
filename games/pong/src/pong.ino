@@ -47,9 +47,9 @@ void loop() {
 void play() {
     arduboy.fillRect(ballx, bally, ballSize, ballSize, WHITE);
     right == 1 ? ballx++ : ballx--;
-    right = ballx == 0 ? 1 : ballx == 127 ? 0 : right;
+    right = ballx == 0 ? 1 : ballx + ballSize == 127 ? 0 : right;
     down == 1 ? bally++ : bally--;
-    down = bally == 0 ? 1 : bally == 63 ? 0 : down;
+    down = bally == 0 ? 1 : bally + ballSize == 63 ? 0 : down;
 }
 
 void moveToScreen() {
