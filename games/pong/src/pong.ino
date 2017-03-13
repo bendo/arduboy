@@ -83,7 +83,7 @@ void play() {
     }
     // move computer's paddle
     arduboy.fillRect(computerx, computery, paddleWidth, paddleHeight, WHITE);
-    if (ballx > 80 || rand() % 20 == 1) {
+    if (ballx > 110 || rand() % 20 == 1) {
         bally < computery ? computery-- : bally + ballSize > computery +
         paddleHeight ? computery++ : computery = computery;
     }
