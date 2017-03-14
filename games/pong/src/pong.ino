@@ -13,7 +13,7 @@ int paddle_width = 4;
 int paddle_height = 9;
 int player_x = 0;
 int player_y = 0;
-int computer_x = 127 - paddle_width;
+int computer_x = WIDTH - paddle_width;
 int computer_y = 0;
 int player_score = 0;
 int computer_score = 0;
@@ -21,9 +21,8 @@ int computer_score = 0;
 void setup()
 {
 	arduboy.begin();
-	srand(7/8);
 	arduboy.setFrameRate(60);
-	arduboy.clear();
+	arduboy.initRandomSeed();
 }
 
 void loop()
@@ -75,7 +74,7 @@ void play()
 	ball_size && computer_y + paddle_height > ball_y;
 	right = playerHit ? 1 : computerHit ? 0 : right;
 	down == 1 ? ball_y++ : ball_y--;
-	down = ball_y == 0 ? 1 : ball_y + ball_size == 63 ? 0 : down;
+	down = ball_y == 0 ? 1 : ball_y + ball_size == HEIGHT ? 0 : down;
 
 	// move player's paddle
 	arduboy.fillRect(player_x, player_y, paddle_width, paddle_height, WHITE);
