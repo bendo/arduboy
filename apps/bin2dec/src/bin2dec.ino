@@ -22,7 +22,6 @@ void setup()
 {
 	arduboy.begin();
 	arduboy.setFrameRate(15);
-	arduboy.bootLogoExtra();
 	print_logo();
 }
 
