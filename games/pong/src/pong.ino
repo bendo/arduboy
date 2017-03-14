@@ -31,12 +31,11 @@ void loop()
 		return;
 
 	arduboy.pollButtons();
-
 	arduboy.clear();
-	arduboy.setCursor(0, 0);
 
 	switch (state) {
 		case 0:
+			arduboy.setCursor(0, 0);
 			arduboy.print("title");
 			reset_score();
 			break;
@@ -50,7 +49,7 @@ void loop()
 			print_score(52, 37, 69, 37, 1);
 			break;
 		case 3:
-			arduboy.print("lose");
+			arduboy.drawBitmap(0, 0, lose, 128, 64, WHITE);
 			print_score(52, 37, 69, 37, 1);
 			break;
 	}
