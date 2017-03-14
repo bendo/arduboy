@@ -1,4 +1,5 @@
 #include <Arduboy2.h>
+#include "bitmaps.h"
 
 Arduboy2 arduboy;
 
@@ -37,31 +38,37 @@ void loop()
 	switch (state) {
 		case 0:
 			arduboy.print("title");
+			reset_score();
 			break;
 		case 1:
-			print_score();
+			print_score(20, 0, 101, 0, 0);
 			play();
 			count_score();
 			break;
 		case 2:
-			arduboy.print("win");
-			reset_score();
+			arduboy.drawBitmap(0, 0, win, 128, 64, WHITE);
+			print_score(52, 37, 69, 37, 1);
 			break;
 		case 3:
 			arduboy.print("lose");
-			reset_score();
+			print_score(52, 37, 69, 37, 1);
 			break;
 	}
 	move_screen();
 	arduboy.display();
 }
 
-void print_score()
+void print_score(int px, int py, int cx, int cy, int final_score)
 {
-	arduboy.setCursor(20, 0);
+	arduboy.setCursor(px, py);
 	arduboy.print(player_score);
-	arduboy.setCursor(101, 0);
+	arduboy.setCursor(cx, cy);
 	arduboy.print(computer_score);
+
+	if (final_score) {
+		arduboy.drawPixel(63, 39);
+		arduboy.drawPixel(63, 42);
+	}
 }
 
 void play()
@@ -117,6 +124,6 @@ void reset_score()
 
 void move_screen()
 {
-	if (arduboy.justPressed(A_BUTTON)) 
-		state = state < 3 ? state + 1 : 0;
+	if (arduboy.justPressed(A_BUTTON) && state != 1)
+		state = state == 0 ? 1 : 0;
 }
