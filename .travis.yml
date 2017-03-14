@@ -17,6 +17,7 @@
  install:
      - pip install -U platformio
      - platformio lib install "Arduboy"
+     - platformio lib install "Arduboy2"
 
  script:
      - platformio ci --board=arduboy
