@@ -1,6 +1,6 @@
-#include "Arduboy.h"
+#include <Arduboy2.h>
 
-Arduboy arduboy;
+Arduboy2 arduboy;
 
 uint8_t position{0};
 
@@ -20,7 +20,7 @@ uint16_t my_pow(uint8_t x, uint8_t n);
 
 void setup()
 {
-	arduboy.beginNoLogo();
+	arduboy.begin();
 	arduboy.setFrameRate(15);
 	print_logo();
 	update_display();
@@ -31,37 +31,30 @@ void loop()
 	if (!(arduboy.nextFrame()))
 		return;
 
-	if (arduboy.pressed(LEFT_BUTTON)) {
-		if (position > 0)
-			position--;
-		else
-			position = 15;
-	}
+	arduboy.pollButtons();
 
-	if (arduboy.pressed(RIGHT_BUTTON)) {
-		if (position < 15)
-			position++;
-		else
-			position = 0;
-	}
+	if (arduboy.justPressed(LEFT_BUTTON))
+		position > 0 ? position-- : position = 15;
 
-	if (arduboy.pressed(UP_BUTTON) || arduboy.pressed(DOWN_BUTTON)) {
+	if (arduboy.justPressed(RIGHT_BUTTON))
+		position < 15 ? position++ : position = 0;
+
+	if (arduboy.justPressed(UP_BUTTON) || arduboy.justPressed(DOWN_BUTTON)) {
 		strIn[position] ^= 0x01;
 		bin2dec();
 	}
 
-	if (arduboy.pressed(A_BUTTON)) {
+	if (arduboy.justPressed(A_BUTTON)) {
 		strncpy(strIn, "1111111111111111", 17);
 		bin2dec();
 	}
 
-	if (arduboy.pressed(B_BUTTON)) {
+	if (arduboy.justPressed(B_BUTTON)) {
 		strncpy(strIn, "0000000000000000", 17);
 		bin2dec();
 	}
 
 	update_display();
-	delay(100);
 }
 
 void print_logo()
