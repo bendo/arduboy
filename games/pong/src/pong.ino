@@ -1,9 +1,8 @@
-#include "Arduboy.h"
+#include <Arduboy2.h>
 
-Arduboy arduboy;
+Arduboy2 arduboy;
 
 int state = 0;
-int pressed = 0;
 int ball_x = 62;
 int ball_y = 0;
 int ball_size = 4;
@@ -30,6 +29,8 @@ void loop()
 	if (!arduboy.nextFrame())
 		return;
 
+	arduboy.pollButtons();
+
 	arduboy.clear();
 	arduboy.setCursor(0, 0);
 
@@ -51,7 +52,7 @@ void loop()
 			reset_score();
 			break;
 	}
-	move_to_screen();
+	move_screen();
 	arduboy.display();
 }
 
@@ -78,12 +79,11 @@ void play()
 
 	// move player's paddle
 	arduboy.fillRect(player_x, player_y, paddle_width, paddle_height, WHITE);
-	if (arduboy.pressed(UP_BUTTON) && player_y > 0) {
+	if (arduboy.pressed(UP_BUTTON) && player_y > 0)
 		player_y--;
-	}
-	if (arduboy.pressed(DOWN_BUTTON) && player_y + paddle_height < 63) {
+
+	if (arduboy.pressed(DOWN_BUTTON) && player_y + paddle_height < HEIGHT)
 		player_y++;
-	}
 
 	// move computer's paddle
 	arduboy.fillRect(computer_x, computer_y, paddle_width, paddle_height, WHITE);
@@ -115,13 +115,8 @@ void reset_score()
 	ball_x = 64;
 }
 
-void move_to_screen()
+void move_screen()
 {
-	if (arduboy.pressed(A_BUTTON) && pressed == 0) {
+	if (arduboy.justPressed(A_BUTTON)) 
 		state = state < 3 ? state + 1 : 0;
-		pressed = 1;
-	}
-	if (arduboy.notPressed(A_BUTTON)) {
-		pressed = 0;
-	}
 }
