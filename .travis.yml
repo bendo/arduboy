@@ -20,4 +20,4 @@
      - platformio lib install "Arduboy2"
 
  script:
-     - platformio ci --board=arduboy
+     - platformio ci --board=arduboy --lib="."
