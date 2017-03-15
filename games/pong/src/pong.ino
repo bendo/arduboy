@@ -35,8 +35,7 @@ void loop()
 
 	switch (state) {
 		case 0:
-			arduboy.setCursor(0, 0);
-			arduboy.print("title");
+			arduboy.drawBitmap(0, 0, intro, 128, 64, WHITE);
 			reset_score();
 			break;
 		case 1:
